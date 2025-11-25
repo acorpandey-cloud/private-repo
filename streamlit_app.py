@@ -637,7 +637,7 @@ def main():
     
     # Sidebar
     with st.sidebar:
-        st.image("### ☁️ CloudEagle")
+        st.image("☁️ CloudEagle")
         st.markdown("---")
         st.markdown("### 🎯 Progress")
         
