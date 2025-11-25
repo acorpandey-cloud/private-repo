@@ -637,7 +637,7 @@ def main():
     
     # Sidebar
     with st.sidebar:
-        st.image("https://via.placeholder.com/150x50/0078d4/ffffff?text=CloudEagle", use_container_width=True)
+        st.image("### ☁️ CloudEagle")
         st.markdown("---")
         st.markdown("### 🎯 Progress")
         
