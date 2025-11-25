@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudEagle AI Integration Builder - Figma Mockups</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #1e1e1e;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .figma-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .figma-header {
+            background: #2c2c2c;
+            padding: 15px 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .figma-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .screen-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+        
+        .screen-tab {
+            padding: 12px 24px;
+            background: #2c2c2c;
+            border-radius: 8px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        
+        .screen-tab:hover {
+            background: #3c3c3c;
+        }
+        
+        .screen-tab.active {
+            background: #0078d4;
+        }
+        
+        .screen-content {
+            display: none;
+            background: #fff;
+            border-radius: 16px;
+            padding: 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .screen-content.active {
+            display: block;
+        }
+        
+        .mockup-frame {
+            background: #ffffff;
+            color: #000;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .mockup-header {
+            background: linear-gradient(135deg, #0078d4 0%, #0063b1 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .mockup-logo {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .mockup-help {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .mockup-body {
+            padding: 40px 50px;
+        }
+        
+        .step-indicator {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .step-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #0078d4;
+        }
+        
+        .form-section {
+            margin-bottom: 35px;
+        }
+        
+        .form-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 12px;
+        }
+        
+        .form-icon {
+            font-size: 20px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #0078d4;
+            box-shadow: 0 0 0 3px rgba(0,120,212,0.1);
+        }
+        
+        .form-hint {
+            font-size: 13px;
+            color: #666;
+            margin-top: 8px;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .radio-option {
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .radio-option:hover {
+            border-color: #0078d4;
+            background: #f8f9fa;
+        }
+        
+        .radio-option.selected {
+            border-color: #0078d4;
+            background: #e7f3ff;
+        }
+        
+        .radio-circle {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #999;
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .radio-option.selected .radio-circle {
+            border-color: #0078d4;
+        }
+        
+        .radio-option.selected .radio-circle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #0078d4;
+            border-radius: 50%;
+        }
+        
+        .advanced-options {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #999;
+            border-radius: 4px;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+        
+        .btn-primary {
+            background: #0078d4;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0063b1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,120,212,0.3);
+        }
+        
+        /* Screen 2: Loading */
+        .loading-container {
+            text-align: center;
+            padding: 60px 40px;
+        }
+        
+        .loading-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0078d4, #00bcf2);
+            border-radius: 6px;
+            transition: width 0.3s;
+        }
+        
+        .status-list {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .status-icon {
+            font-size: 24px;
+        }
+        
+        .status-item.complete {
+            background: #e7f5e7;
+        }
+        
+        .status-item.active {
+            background: #e7f3ff;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .ai-insights {
+            background: #fff8e6;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 4px solid #ffb900;
+        }
+        
+        .ai-insights-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .insight-item {
+            padding: 8px 0;
+            color: #666;
+        }
+        
+        /* Screen 3: Code Review */
+        .code-review-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+        }
+        
+        .code-editor {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        
+        .code-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            background: #2d2d2d;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .code-tab {
+            padding: 8px 16px;
+            background: #1e1e1e;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .code-tab.active {
+            background: #0078d4;
+        }
+        
+        .quality-report {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .quality-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .quality-score {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .quality-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quality-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* Screen 4: Sandbox */
+        .sandbox-header {
+            background: #fff8e6;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #ffb900;
+        }
+        
+        .credentials-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .cred-item {
+            margin-bottom: 15px;
+        }
+        
+        .cred-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .cred-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d0d0d0;
+            border-radius: 6px;
+            font-family: monospace;
+        }
+        
+        .test-section {
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .test-name {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .test-status {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .test-status.passed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .test-output {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        .checklist {
+            background: #e7f5e7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+        }
+        
+        .check-icon {
+            color: #28a745;
+            font-size: 20px;
+        }
+        
+        /* Screen 5: Deploy */
+        .warning-banner {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .deploy-checklist {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .deploy-option {
+            margin-bottom: 20px;
+        }
+        
+        .artifacts {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .artifact-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .artifact-item:last-child {
+            border-bottom: none;
+        }
+        
+        .download-btn {
+            padding: 6px 16px;
+            background: #0078d4;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        
+        .deploy-button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .btn-deploy {
+            padding: 18px 60px;
+            font-size: 18px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .btn-deploy:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40,167,69,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="figma-container">
+        <div class="figma-header">
+            <div class="figma-title">🎨 CloudEagle AI Integration Builder - Design Mockups</div>
+            <div style="color: #999; font-size: 14px;">Interactive Prototype</div>
+        </div>
+        
+        <div class="screen-tabs">
+            <div class="screen-tab active" onclick="showScreen(0)">Screen 1: Configure</div>
+            <div class="screen-tab" onclick="showScreen(1)">Screen 2: Generate</div>
+            <div class="screen-tab" onclick="showScreen(2)">Screen 3: Review Code</div>
+            <div class="screen-tab" onclick="showScreen(3)">Screen 4: Test Sandbox</div>
+            <div class="screen-tab" onclick="showScreen(4)">Screen 5: Deploy</div>
+        </div>
+        
+        <!-- Screen 1: Configure -->
+        <div class="screen-content active">
+            <div class="mockup-frame">
+                <div class="mockup-header">
+                    <div class="mockup-logo">☁️ CloudEagle AI Integration Builder</div>
+                    <div class="mockup-help">? Help</div>
+                </div>
+                <div class="mockup-body">
+                    <div class="step-indicator">Step 1 of 4</div>
+                    <div class="step-title">Configure Your Integration</div>
+                    
+                    <div class="form-section">
+                        <div class="form-label">
+                            <span class="form-icon">📄</span>
+                            API Documentation
+                        </div>
+                        <input type="text" class="form-input" value="https://developer.calendly.com/api-docs/4b402d5ab3edd-calendly-developer" placeholder="Paste API documentation URL">
+                        <div class="form-hint">💡 Paste any API documentation URL (Swagger, OpenAPI, or regular API docs)</div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <div class="form-label">
+                            <span class="form-icon">🔐</span>
+                            Authentication Method
+                        </div>
+                        <div class="radio-group">
+                            <div class="radio-option selected">
+                                <div class="radio-circle"></div>
+                                <span>OAuth 2.0 (Recommended)</span>
+                            </div>
+                            <div class="radio-option">
+                                <div class="radio-circle"></div>
+                                <span>API Key</span>
+                            </div>
+                            <div class="radio-option">
+                                <div class="radio-circle"></div>
+                                <span>Bearer Token</span>
+                            </div>
+                            <div class="radio-option">
+                                <div class="radio-circle"></div>
+                                <span>Auto-detect from documentation</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <div class="form-label">
+                            <span class="form-icon">💻</span>
+                            Code Language
+                        </div>
+                        <select class="form-input">
+                            <option>Python (Recommended)</option>
+                            <option disabled>Node.js (Coming Soon)</option>
+                            <option disabled>Go (Coming Soon)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-section">
+                        <div class="form-label">
+                            <span class="form-icon">⚙️</span>
+                            Advanced Options (Optional)
+                        </div>
+                        <div class="advanced-options">
+                            <div class="checkbox-option">
+                                <div class="checkbox"></div>
+                                <span>Custom rate limit handling</span>
+                            </div>
+                            <div class="checkbox-option">
+                                <div class="checkbox"></div>
+                                <span>Webhook support</span>
+                            </div>
+                            <div class="checkbox-option">
+                                <div class="checkbox"></div>
+                                <span>Custom retry logic</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-secondary">Cancel</button>
+                        <button class="btn btn-primary">Generate Integration Code →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Screen 2: Generate -->
+        <div class="screen-content">
+            <div class="mockup-frame">
+                <div class="mockup-header">
+                    <div class="mockup-logo">☁️ CloudEagle AI Integration Builder</div>
+                    <div class="mockup-help">? Help</div>
+                </div>
+                <div class="mockup-body">
+                    <div class="loading-container">
+                        <div class="loading-title">Generating Your Integration...</div>
+                        
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%"></div>
+                        </div>
+                        
+                        <div class="status-list">
+                            <div class="status-item complete">
+                                <span class="status-icon">✓</span>
+                                <span>Analyzing API documentation</span>
+                            </div>
+                            <div class="status-item complete">
+                                <span class="status-icon">✓</span>
+                                <span>Identifying authentication requirements</span>
+                            </div>
+                            <div class="status-item complete">
+                                <span class="status-icon">✓</span>
+                                <span>Mapping API endpoints</span>
+                            </div>
+                            <div class="status-item active">
+                                <span class="status-icon">⏳</span>
+                                <span>Generating authentication code...</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-icon">○</span>
+                                <span>Creating data retrieval methods</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-icon">○</span>
+                                <span>Adding error handling</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-icon">○</span>
+                                <span>Implementing pagination</span>
+                            </div>
+                        </div>
+                        
+                        <div class="ai-insights">
+                            <div class="ai-insights-title">
+                                <span>🤖</span>
+                                <span>AI Insights</span>
+                            </div>
+                            <div class="insight-item">• Detected OAuth 2.0 with refresh token flow</div>
+                            <div class="insight-item">• Found 12 relevant endpoints for user data</div>
+                            <div class="insight-item">• Pagination uses cursor-based method</div>
+                            <div class="insight-item">• Rate limit: 500 requests/minute</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Screen 3: Code Review -->
+        <div class="screen-content">
+            <div class="mockup-frame">
+                <div class="mockup-header">
+                    <div class="mockup-logo">☁️ CloudEagle AI Integration Builder</div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="mockup-help">Save</button>
+                        <button class="mockup-help">Test</button>
+                        <button class="mockup-help">▶ Run</button>
+                    </div>
+                </div>
+                <div class="mockup-body">
+                    <div class="step-indicator">Step 2 of 4</div>
+                    <div class="step-title">Review Generated Code</div>
+                    
+                    <div class="code-review-layout">
+                        <div>
+                            <div class="code-tabs">
+                                <div class="code-tab active">Auth Setup</div>
+                                <div class="code-tab">API Client</div>
+                                <div class="code-tab">Get Users</div>
+                                <div class="code-tab">Error Handling</div>
+                                <div class="code-tab">Pagination</div>
+                                <div class="code-tab">Logging</div>
+                            </div>
+                            <div class="code-editor">
+<pre style="margin: 0; color: #d4d4d4;"># Authentication Setup
+<span style="color: #c586c0;">import</span> requests
+<span style="color: #c586c0;">from</span> typing <span style="color: #c586c0;">import</span> Dict, Optional
+<span style="color: #c586c0;">import</span> os
+
+<span style="color: #c586c0;">class</span> <span style="color: #4ec9b0;">CalendlyAuth</span>:
+    <span style="color: #6a9955;">"""Handles OAuth 2.0 authentication for Calendly API"""</span>
+    
+    <span style="color: #c586c0;">def</span> <span style="color: #dcdcaa;">__init__</span>(<span style="color: #9cdcfe;">self</span>, client_id: str, client_secret: str):
+        <span style="color: #9cdcfe;">self</span>.client_id = client_id
+        <span style="color: #9cdcfe;">self</span>.client_secret = client_secret
+        <span style="color: #9cdcfe;">self</span>.access_token: Optional[str] = <span style="color: #569cd6;">None</span>
+        <span style="color: #9cdcfe;">self</span>.refresh_token: Optional[str] = <span style="color: #569cd6;">None</span>
+        <span style="color: #9cdcfe;">self</span>.token_expires_at: Optional[int] = <span style="color: #569cd6;">None</span>
+    
+    <span style="color: #c586c0;">def</span> <span style="color: #dcdcaa;">get_authorization_url</span>(<span style="color: #9cdcfe;">self</span>, redirect_uri: str) -> str:
+        <span style="color: #6a9955;">"""Generate OAuth authorization URL"""</span>
+        <span style="color: #c586c0;">return</span> (
+            <span style="color: #ce9178;">f"https://auth.calendly.com/oauth/authorize?"</span>
+            <span style="color: #ce9178;">f"client_id={self.client_id}&"</span>
+            <span style="color: #ce9178;">f"redirect_uri={redirect_uri}&"</span>
+            <span style="color: #ce9178;">f"response_type=code"</span>
+        )
+    
+    <span style="color: #c586c0;">def</span> <span style="color: #dcdcaa;">exchange_code_for_token</span>(<span style="color: #9cdcfe;">self</span>, code: str, 
+                                  redirect_uri: str) -> Dict:
+        <span style="color: #6a9955;">"""Exchange authorization code for access token"""</span>
+        response = requests.post(
+            <span style="color: #ce9178;">"https://auth.calendly.com/oauth/token"</span>,
+            data={
+                <span style="color: #ce9178;">"grant_type"</span>: <span style="color: #ce9178;">"authorization_code"</span>,
+                <span style="color: #ce9178;">"code"</span>: code,
+                <span style="color: #ce9178;">"redirect_uri"</span>: redirect_uri,
+                <span style="color: #ce9178;">"client_id"</span>: <span style="color: #9cdcfe;">self</span>.client_id,
+                <span style="color: #ce9178;">"client_secret"</span>: <span style="color: #9cdcfe;">self</span>.client_secret
+            }
+        )
+        <span style="color: #c586c0;">return</span> response.json()
+
+<span style="color: #6a9955;"># ... 45 more lines of authentication logic ...</span></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="quality-report">
+                            <div class="quality-title">
+                                <span>📋 AI Quality Report</span>
+                                <span class="quality-score">✓ 9.2/10</span>
+                            </div>
+                            <div class="quality-item">
+                                <span>✓</span>
+                                <div>
+                                    <div style="font-weight: 600;">Security</div>
+                                    <div style="font-size: 12px; color: #666;">No hardcoded credentials</div>
+                                </div>
+                            </div>
+                            <div class="quality-item">
+                                <span>✓</span>
+                                <div>
+                                    <div style="font-weight: 600;">Error Handling</div>
+                                    <div style="font-size: 12px; color: #666;">Comprehensive try-catch</div>
+                                </div>
+                            </div>
+                            <div class="quality-item">
+                                <span>✓</span>
+                                <div>
+                                    <div style="font-weight: 600;">Pagination</div>
+                                    <div style="font-size: 12px; color: #666;">Cursor-based auto-iteration</div>
+                                </div>
+                            </div>
+                            <div class="quality-item">
+                                <span>✓</span>
+                                <div>
+                                    <div style="font-weight: 600;">Rate Limiting</div>
+                                    <div style="font-size: 12px; color: #666;">Exponential backoff</div>
+                                </div>
+                            </div>
+                            <div class="quality-item">
+                                <span>✓</span>
+                                <div>
+                                    <div style="font-weight: 600;">Logging</div>
+                                    <div style="font-size: 12px; color: #666;">Structured with correlation</div>
+                                </div>
+                            </div>
+                            <div class="quality-item">
+                                <span>⚠️</span>
+                                <div>
+                                    <div style="font-weight: 600;">Best Practices</div>
+                                    <div style="font-size: 12px; color: #666;">Consider request timeout</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-secondary">← Back</button>
+                        <button class="btn btn-primary">Test in Sandbox →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Screen 4: Sandbox Testing -->
+        <div class="screen-content">
+            <div class="mockup-frame">
+                <div class="mockup-header">
+                    <div class="mockup-logo">☁️ CloudEagle AI Integration Builder</div>
+                    <div style="background: rgba(255,255,255,0.3); padding: 6px 12px; border-radius: 6px;">
+                        🔒 Sandbox
+                    </div>
+                </div>
+                <div class="mockup-body">
+                    <div class="step-indicator">Step 3 of 4</div>
+                    <div class="step-title">Test in Sandbox Environment</div>
+                    
+                    <div class="sandbox-header">
+                        <div style="font-weight: 600; margin-bottom: 8px;">🔒 Sandbox Environment (Safe Testing)</div>
+                        <div style="font-size: 14px; color: #666;">Test your integration safely before deploying to production</div>
+                    </div>
+                    
+                    <div class="credentials-box">
+                        <div style="font-weight: 600; margin-bottom: 15px;">Test Credentials</div>
+                        <div class="cred-item">
+                            <div class="cred-label">Client ID</div>
+                            <input type="text" class="cred-input" value="test_abc123******************" readonly>
+                        </div>
+                        <div class="cred-item">
+                            <div class="cred-label">Client Secret</div>
+                            <input type="password" class="cred-input" value="••••••••••••••••••••••">
+                        </div>
+                        <div class="cred-item">
+                            <div class="cred-label">Redirect URI</div>
+                            <input type="text" class="cred-input" value="https://sandbox.cloudeagle.ai/oauth" readonly>
+                        </div>
+                        <div style="font-size: 13px; color: #666; margin-top: 10px;">
+                            💡 Use test credentials provided by the API provider
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <div style="font-size: 18px; font-weight: 600;">Quick Tests</div>
+                        <button class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;">Run All Tests</button>
+                    </div>
+                    
+                    <div class="test-section">
+                        <div class="test-header">
+                            <div class="test-name">
+                                <span>✓</span>
+                                <span>Authentication</span>
+                            </div>
+                            <div>
+                                <button class="btn" style="padding: 6px 16px; font-size: 13px; background: #f0f0f0;">▶ Test</button>
+                                <span class="test-status passed" style="margin-left: 10px;">✓ Passed</span>
+                            </div>
+                        </div>
+                        <div style="color: #666; font-size: 14px;">Connected successfully</div>
+                    </div>
+                    
+                    <div class="test-section">
+                        <div class="test-header">
+                            <div class="test-name">
+                                <span>✓</span>
+                                <span>Get Users</span>
+                            </div>
+                            <div>
+                                <button class="btn" style="padding: 6px 16px; font-size: 13px; background: #f0f0f0;">▶ Test</button>
+                                <span class="test-status passed" style="margin-left: 10px;">✓ Passed</span>
+                            </div>
+                        </div>
+                        <div style="color: #666; font-size: 14px; margin-bottom: 10px;">Retrieved 25 users</div>
+                        <div class="test-output">
+{
+  "uri": "https://api.calendly.com/users/AAAAAAAAAAAAAAAA",
+  "name": "John Doe",
+  "email": "john@example.com",
+  "timezone": "America/New_York",
+  "created_at": "2024-01-15T10:00:00.000000Z"
+}</div>
+                    </div>
+                    
+                    <div class="test-section">
+                        <div class="test-header">
+                            <div class="test-name">
+                                <span>✓</span>
+                                <span>Pagination</span>
+                            </div>
+                            <div>
+                                <button class="btn" style="padding: 6px 16px; font-size: 13px; background: #f0f0f0;">▶ Test</button>
+                                <span class="test-status passed" style="margin-left: 10px;">✓ Passed</span>
+                            </div>
+                        </div>
+                        <div style="color: #666; font-size: 14px;">Iterated through 3 pages (75 total records)</div>
+                    </div>
+                    
+                    <div class="test-section">
+                        <div class="test-header">
+                            <div class="test-name">
+                                <span>✓</span>
+                                <span>Error Handling</span>
+                            </div>
+                            <div>
+                                <button class="btn" style="padding: 6px 16px; font-size: 13px; background: #f0f0f0;">▶ Test</button>
+                                <span class="test-status passed" style="margin-left: 10px;">✓ Passed</span>
+                            </div>
+                        </div>
+                        <div style="color: #666; font-size: 14px;">Gracefully handled 429 rate limit</div>
+                        <div style="color: #666; font-size: 14px;">Retry with backoff successful</div>
+                    </div>
+                    
+                    <div class="checklist">
+                        <div style="font-weight: 600; margin-bottom: 15px; display: flex; justify-content: space-between;">
+                            <span>Validation Checklist</span>
+                            <span style="color: #28a745;">✓ 4/4 Passed</span>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <span>Authentication works</span>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <span>Data retrieval successful</span>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <span>Error handling tested</span>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="check-icon">✓</span>
+                            <span>Pagination works correctly</span>
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-secondary">← Back to Code</button>
+                        <button class="btn btn-primary">Deploy to Production →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Screen 5: Deploy -->
+        <div class="screen-content">
+            <div class="mockup-frame">
+                <div class="mockup-header">
+                    <div class="mockup-logo">☁️ CloudEagle AI Integration Builder</div>
+                    <div style="background: rgba(255,255,255,0.3); padding: 6px 12px; border-radius: 6px;">
+                        Production
+                    </div>
+                </div>
+                <div class="mockup-body">
+                    <div class="step-indicator">Step 4 of 4</div>
+                    <div class="step-title">Deploy to Production</div>
+                    
+                    <div class="warning-banner">
+                        <div style="font-weight: 600; margin-bottom: 8px;">⚠️ Pre-Deployment Checklist</div>
+                        <div class="deploy-checklist">
+                            <div class="checklist-item">
+                                <span class="check-icon">✓</span>
+                                <span>Sandbox tests passed</span>
+                            </div>
+                            <div class="checklist-item">
+                                <span class="check-icon">✓</span>
+                                <span>Production credentials configured</span>
+                            </div>
+                            <div class="checklist-item">
+                                <span class="check-icon">✓</span>
+                                <span>Error alerting enabled</span>
+                            </div>
+                            <div class="checklist-item">
+                                <span class="check-icon">✓</span>
+                                <span>Rate limit monitoring active</span>
+                            </div>
+                            <div class="checklist-item" style="opacity: 0.6;">
+                                <span style="color: #999;">☐</span>
+                                <span>Code review approved (Optional)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="credentials-box">
+                        <div style="font-weight: 600; margin-bottom: 15px;">Production Credentials</div>
+                        <div class="cred-item">
+                            <div class="cred-label">Client ID</div>
+                            <input type="text" class="cred-input" value="prod_xyz789******************">
+                        </div>
+                        <div class="cred-item">
+                            <div class="cred-label">Client Secret</div>
+                            <input type="password" class="cred-input" value="••••••••••••••••••••••">
+                        </div>
+                        <div class="cred-item">
+                            <div class="cred-label">Redirect URI</div>
+                            <input type="text" class="cred-input" value="https://app.cloudeagle.ai/oauth">
+                        </div>
+                    </div>
+                    
+                    <div class="credentials-box">
+                        <div style="font-weight: 600; margin-bottom: 15px;">Deployment Options</div>
+                        <div class="deploy-option">
+                            <div class="cred-label">Environment</div>
+                            <select class="form-input">
+                                <option>Production</option>
+                                <option>Staging</option>
+                            </select>
+                        </div>
+                        <div class="deploy-option">
+                            <div class="cred-label">Rollout Strategy</div>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <div class="radio-circle"></div>
+                                    <span>Full deployment</span>
+                                </div>
+                                <div class="radio-option selected">
+                                    <div class="radio-circle"></div>
+                                    <span>Gradual (10% → 50% → 100%)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkbox-option">
+                            <div class="checkbox" style="background: #0078d4; border-color: #0078d4; position: relative;">
+                                <span style="position: absolute; top: -2px; left: 3px; color: white;">✓</span>
+                            </div>
+                            <span>Alert on >5% error rate</span>
+                        </div>
+                        <div class="checkbox-option">
+                            <div class="checkbox" style="background: #0078d4; border-color: #0078d4; position: relative;">
+                                <span style="position: absolute; top: -2px; left: 3px; color: white;">✓</span>
+                            </div>
+                            <span>Auto-rollback enabled</span>
+                        </div>
+                    </div>
+                    
+                    <div class="artifacts">
+                        <div style="font-weight: 600; margin-bottom: 15px;">Generated Artifacts</div>
+                        <div class="artifact-item">
+                            <span>📄 calendly_integration.py</span>
+                            <a href="#" class="download-btn">Download</a>
+                        </div>
+                        <div class="artifact-item">
+                            <span>📋 README.md</span>
+                            <a href="#" class="download-btn">Download</a>
+                        </div>
+                        <div class="artifact-item">
+                            <span>🧪 test_calendly.py</span>
+                            <a href="#" class="download-btn">Download</a>
+                        </div>
+                        <div class="artifact-item">
+                            <span>📊 Monitoring Dashboard</span>
+                            <a href="#" class="download-btn">View</a>
+                        </div>
+                    </div>
+                    
+                    <div class="deploy-button-container">
+                        <button class="btn-deploy">Deploy to Production</button>
+                        <div style="margin-top: 15px; color: #666; font-size: 14px;">
+                            This will activate the integration in your production CloudEagle environment
+                        </div>
+                    </div>
+                    
+                    <div class="button-group" style="margin-top: 40px;">
+                        <button class="btn btn-secondary">← Back to Testing</button>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showScreen(index) {
+            const tabs = document.querySelectorAll('.screen-tab');
+            const screens = document.querySelectorAll('.screen-content');
+            
+            tabs.forEach((tab, i) => {
+                if (i === index) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            screens.forEach((screen, i) => {
+                if (i === index) {
+                    screen.classList.add('active');
+                } else {
+                    screen.classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
