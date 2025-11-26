@@ -781,19 +781,31 @@ def main():
         auth_col1, auth_col2, auth_col3, auth_col4 = st.columns(4)
         
         with auth_col1:
-            if st.button("OAuth 2.0 (Recommended)", use_container_width=True, type="primary"):
+            if st.button("OAuth 2.0 (Recommended)", 
+                        use_container_width=True, 
+                        type="primary" if st.session_state.auth_method == "OAuth 2.0" else "secondary"):
                 st.session_state.auth_method = "OAuth 2.0"
+                st.rerun()
         with auth_col2:
-            if st.button("API Key", use_container_width=True):
+            if st.button("API Key", 
+                        use_container_width=True,
+                        type="primary" if st.session_state.auth_method == "API Key" else "secondary"):
                 st.session_state.auth_method = "API Key"
+                st.rerun()
         with auth_col3:
-            if st.button("Bearer Token", use_container_width=True):
+            if st.button("Bearer Token", 
+                        use_container_width=True,
+                        type="primary" if st.session_state.auth_method == "Bearer Token" else "secondary"):
                 st.session_state.auth_method = "Bearer Token"
+                st.rerun()
         with auth_col4:
-            if st.button("Auto-detect", use_container_width=True):
+            if st.button("Auto-detect", 
+                        use_container_width=True,
+                        type="primary" if st.session_state.auth_method == "Auto-detect" else "secondary"):
                 st.session_state.auth_method = "Auto-detect"
+                st.rerun()
         
-        st.info(f"Selected: {st.session_state.auth_method}")
+        st.info(f"✅ Selected: {st.session_state.auth_method}")
         
         # Permission Mode Selection
         st.markdown("#### 🛡️ Safety Mode")
@@ -808,24 +820,33 @@ def main():
         mode_col1, mode_col2, mode_col3 = st.columns(3)
         
         with mode_col1:
-            if st.button("🟢 Read-Only (Safe)", use_container_width=True, type="primary",
+            if st.button("🟢 Read-Only (Safe)", 
+                        use_container_width=True, 
+                        type="primary" if st.session_state.permission_mode == PermissionMode.READ_ONLY else "secondary",
                         help="GET requests only - cannot modify data"):
                 st.session_state.permission_mode = PermissionMode.READ_ONLY
+                st.rerun()
         with mode_col2:
-            if st.button("🟡 Read-Write", use_container_width=True,
+            if st.button("🟡 Read-Write", 
+                        use_container_width=True,
+                        type="primary" if st.session_state.permission_mode == PermissionMode.READ_WRITE else "secondary",
                         help="GET, POST, PUT, PATCH - can create and update"):
                 st.session_state.permission_mode = PermissionMode.READ_WRITE
+                st.rerun()
         with mode_col3:
-            if st.button("🔴 Full Access (Admin)", use_container_width=True,
+            if st.button("🔴 Full Access (Admin)", 
+                        use_container_width=True,
+                        type="primary" if st.session_state.permission_mode == PermissionMode.FULL_ACCESS else "secondary",
                         help="All methods including DELETE - admin approval required"):
                 st.session_state.permission_mode = PermissionMode.FULL_ACCESS
+                st.rerun()
         
         mode_descriptions = {
             PermissionMode.READ_ONLY: "🟢 Read-Only: GET requests only (safest)",
             PermissionMode.READ_WRITE: "🟡 Read-Write: GET + POST/PUT/PATCH (can modify data)",
             PermissionMode.FULL_ACCESS: "🔴 Full Access: All methods including DELETE (requires admin)"
         }
-        st.info(f"**Current Mode:** {mode_descriptions[st.session_state.permission_mode]}")
+        st.info(f"✅ **Current Mode:** {mode_descriptions[st.session_state.permission_mode]}")
         
         if st.session_state.permission_mode != PermissionMode.READ_ONLY:
             st.warning(f"⚠️ **Warning:** {st.session_state.permission_mode.replace('_', ' ').title()} mode can modify production data. Test thoroughly in sandbox!")
