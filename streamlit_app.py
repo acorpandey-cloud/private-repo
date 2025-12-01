@@ -772,7 +772,7 @@ def main():
             st.markdown("#### 💻 Programming Language")
             language = st.selectbox(
                 "Select Language",
-                ["Python", "Node.js (Coming Soon)", "Go (Coming Soon)"],
+                ["Python"],
                 help="Select the programming language for generated code",
                 label_visibility="collapsed"
             )
